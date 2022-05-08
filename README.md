@@ -17,3 +17,7 @@ docker run -p 8080:443 projecte_sm_gcp:latest
 ```
 
 Si s'han fet bé els pasos a l'adreça http://localhost:8080 es podrà veure la UI de la web.
+
+## Prototype Web UI
+
+![alt text](https://github.com/cristiangutierrz/Corrector-Hackathon/blob/main/public/fonts/imgs/capt1.png?raw=true)
