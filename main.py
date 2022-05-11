@@ -15,7 +15,6 @@ def root():
         if request.form.to_dict()['submit_button'] == 'Corregir':
             text_in = request.form['input'] if len(request.form['input']) > 0 else ''
         session['log'] = text_in
-        print(session['log'])
         return redirect(url_for('root'))
     saved = session.pop('log', None)
     return render_template('index.html', input='' if saved is None else saved, output='' if saved is None else saved)
