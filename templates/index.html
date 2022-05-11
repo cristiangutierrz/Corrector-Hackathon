@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>Datastore and Firebase Auth Example</title>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div id="main">
+        <h1>Corrector</h1>
+        <form>
+            <textarea placeholder="Escriu algo..."></textarea>
+        </form>
+        <input type="button" value="Corregir">
+        <form>
+            <textarea readonly placeholder="El text corregit apareixerà aqui."></textarea>
+        </form>
+        <h2>Last 10 visits</h2>
+        {% for time in times %}
+          <p>{{ time }}</p>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
