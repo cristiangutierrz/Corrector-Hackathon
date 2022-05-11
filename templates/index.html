@@ -3,7 +3,6 @@
 <html>
 <head>
   <title>Corrector Hackathon SM</title>
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
   <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -16,6 +15,8 @@
             <textarea id="output-text" readonly placeholder="El text corregit apareixerà aqui." name="output">{{ output }}</textarea>
         </form>
     </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>
