@@ -17,6 +17,9 @@ def root():
         session['log'] = text_in
 <<<<<<< Updated upstream
         return redirect(url_for('root'))
+=======
+            return redirect(url_for('root'))
+>>>>>>> Stashed changes
     saved = session.pop('log', None)
     return render_template('index.html', input='' if saved is None else saved, output='' if saved is None else saved)
 
