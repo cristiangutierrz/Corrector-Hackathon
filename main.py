@@ -2,11 +2,8 @@ from flask import Flask, request, redirect, url_for, session,render_template
 from flask_session import Session
 
 app = Flask(__name__)
-
-SECRET_KEY = "changeme"
-SESSION_TYPE = 'filesystem'
-app.config.from_object(__name__)
-Session(app)
+app.secret_key = "Some"
+app.config['SESSION_COOKIE_NAME'] = "my_session"
 
 @app.route('/', methods=['GET', 'POST'])
 def root():
@@ -14,12 +11,10 @@ def root():
     if request.method == 'POST':
         if request.form.to_dict()['submit_button'] == 'Corregir':
             text_in = request.form['input'] if len(request.form['input']) > 0 else ''
-        session['log'] = text_in
-        print(session['log'])
+            session['log'] = text_in
         return redirect(url_for('root'))
-    saved = session.pop('log', None)
-    print(saved)
-    return render_template('index.html', input='' if saved is None else saved, output='' if saved is None else saved)
+    local = session.pop('log', None)
+    return render_template('index.html', input='' if local is None else local, output='' if local is None else local)
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
