@@ -1,16 +1,16 @@
 @font-face {
     font-family: Moderat-Regular;
-    src: url('./../public/fonts/Moderat-Regular.woff2') format('woff2');
+    src: local('./../public/fonts/Moderat-Regular.woff2') format('woff2');
   }
   
   @font-face {
     font-family: Moderat-Thin;
-    src: url('./../public/fonts/Moderat-Thin.woff2') format('woff2');
+    src: local('./../public/fonts/Moderat-Thin.woff2') format('woff2');
   }
   
   @font-face {
     font-family: Moderat-Light;
-    src: url('./../public/fonts/Moderat-Light.woff2') format('woff2');
+    src: local('./../public/fonts/Moderat-Light.woff2') format('woff2');
   }
 
 body {
@@ -40,11 +40,11 @@ textarea {
     border-radius: 4px;
     background-color: #f8f8f8;
     font-size: 20px;
-    resize: none;
+    resize: vertical;
     font-family: Moderat-Regular, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
-input[type=button] {
+input[type=submit] {
     background-color: #40f3b1;
     border: none;
     color: rgb(0, 0, 0);

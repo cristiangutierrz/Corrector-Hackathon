@@ -1,17 +1,16 @@
-import datetime
-
-from flask import Flask, render_template
+from flask import Flask, request,render_template
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def root():
-    dummy_times = [datetime.datetime(2018, 1, 1, 10, 0, 0),
-                   datetime.datetime(2018, 1, 2, 10, 30, 0),
-                   datetime.datetime(2018, 1, 3, 11, 0, 0),
-                   ]
+    text_in = ''
+    if request.method == 'POST':
+        if request.form.to_dict()['submit_button'] == 'Corregir':
+            text_in = request.form['input'] if len(request.form['input']) > 0 else ''
+    text_out = text_in
 
-    return render_template('index.html', times=dummy_times)
+    return render_template('index.html', input='' if text_in is None else text_in, output='' if text_out is None else text_out)
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
