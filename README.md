@@ -47,7 +47,6 @@ handlers:
   static_dir: static
 - url: /.*
   script: auto
-``
-
+```
 
 ![alt text](https://github.com/cristiangutierrz/Corrector-Hackathon/blob/main/public/imgs/diagram.drawio.png?raw=true)
