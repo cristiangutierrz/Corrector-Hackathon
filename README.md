@@ -1,6 +1,6 @@
 # Corrector-Hackathon
 
-https://corrector-hackathon-xdmdxx2tlq-ew.a.run.app
+https://corrector-sm.ew.r.appspot.com
 
 Aquest és un projecte del Hackathon de l'assignatura de Sistemes Multimedia de la UAB.
 El projecte és una web hostejada al Google Cloud que ha de ser capaç de corregir un input de text i indicar les faltes.
