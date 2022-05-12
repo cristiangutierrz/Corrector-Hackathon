@@ -19,6 +19,8 @@ def root():
     if local is not None:
         if local and len(local)>0:
             word_D = sp.spell(local)
+        else:
+            local = None
     return render_template('index.html', input='' if local is None else local, output='' if local is None else local + "\n\n" + str(word_D))
 
 if __name__ == '__main__':

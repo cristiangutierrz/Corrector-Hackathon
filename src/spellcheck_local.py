@@ -9,7 +9,6 @@ def spell(input_string):
 
     for word in misspelled:
         # Get the one `most likely` answer
-        print(spell.correction(word))
         l.append(spell.candidates(word))
         # Get a list of `likely` options
         print(spell.candidates(word))
