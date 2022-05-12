@@ -1,0 +1,3 @@
+flask_session/
+.DS_Store
+src/__pycache__/spellcheck_local.cpython-37.pyc
