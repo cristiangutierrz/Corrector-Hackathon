@@ -15,9 +15,10 @@ def root():
             session['log'] = text_in
         return redirect(url_for('root'))
     local = session.pop('log', None)
-    # Ejecutamos pyspellchecker
+    # Si tenemos input ejecutamos pyspellchecker
     if local is not None:
-        word_D = sp.spell(local)
+        if local and len(local)>0:
+            word_D = sp.spell(local)
     return render_template('index.html', input='' if local is None else local, output='' if local is None else local + "\n\n" + str(word_D))
 
 if __name__ == '__main__':
