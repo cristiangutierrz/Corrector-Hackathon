@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, url_for, session,render_template
 from flask_session import Session
+from src import spellcheck_local as sp
 
 app = Flask(__name__)
 app.secret_key = "Some"
@@ -14,7 +15,10 @@ def root():
             session['log'] = text_in
         return redirect(url_for('root'))
     local = session.pop('log', None)
-    return render_template('index.html', input='' if local is None else local, output='' if local is None else local)
+    # Ejecutamos pyspellchecker
+    if local is not None:
+        word_D = sp.spell(local)
+    return render_template('index.html', input='' if local is None else local, output='' if local is None else local + "\n\n" + str(word_D))
 
 if __name__ == '__main__':
     # This is used when running locally only. When deploying to Google App
