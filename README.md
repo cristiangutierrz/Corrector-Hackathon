@@ -9,7 +9,7 @@ El projecte és una web hostejada al Google Cloud que ha de ser capaç de correg
 ```bash
 git clone https://github.com/cristiangutierrz/Corrector-Hackathon.git ~/.
 cd ~/Corrector-Hackathon
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 python3 main.py
 ```
 
