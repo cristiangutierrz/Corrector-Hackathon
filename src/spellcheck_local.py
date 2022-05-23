@@ -7,10 +7,20 @@ def spell(input_string):
 
     l = []
 
-    for word in misspelled:
-        # Get the one `most likely` answer
-        l.append(spell.candidates(word))
-        # Get a list of `likely` options
-        print(spell.candidates(word))
-    return l
+    output = []
+
+    for word in input_string.split():
+        if word in misspelled:
+            output.append("<del>" + word + "</del>")
+            output.append("(")
+            output.append(", ".join(list(spell.candidates(word))))
+            output.append(")")
+        else:
+            output.append(word)
+    
+    return output
+
+def parse(output):
+    
+    return output
 

@@ -10,6 +10,17 @@
     <div id="main">
         <h1>Corrector</h1>
         <form id="form-global" action="{{ url_for('root') }}" method="post">
+            {% if method == None or method == "Typewrite" %}
+                <select name="method" id="method">
+                    <option value="Typewrite" selected>Typewrite API</option>
+                    <option value="PySpellchecker">PySpellchecker</option>
+                </select>
+            {% else %}
+                <select name="method" id="method">
+                    <option value="Typewrite">Typewrite API</option>
+                    <option value="PySpellchecker" selected>PySpellchecker</option>
+                </select>
+            {% endif %}
             <textarea id="input-text" placeholder="Escriu algo..." name="input">{{ input }}</textarea>
             <input type="submit" name="submit_button" value="Corregir" />
             <textarea id="output-text" readonly placeholder="El text corregit apareixerà aqui." name="output">{{ output }}</textarea>
