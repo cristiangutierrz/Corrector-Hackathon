@@ -43,21 +43,22 @@ def root():
     return render_template('index.html', input='' if local is None else local, output='' if local is None else local + "\n\n" + str(word_D), method=method)
 
 def test_api(text_in):
-    print("text_in: ", text_in)
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
-    request = google.auth.transport.requests.Request()
-    audience = 'https://europe-west1-corrector-sm.cloudfunctions.net/corregir_func'
-    TOKEN = google.oauth2.id_token.fetch_id_token(request, audience)
-    r = requests.post(
-        'https://europe-west1-corrector-sm.cloudfunctions.net/corregir_func', 
-        headers={'Authorization': f"Bearer {TOKEN}", "Content-Type": "application/json"},
-        data=json.dumps({"message":text_in})  # possible request parameters
-    )
-    print(r.content)
-    local=''
-    word_D = []
-    print(r.status_code, r.reason)
-    return r.content
+    # print("text_in: ", text_in)
+    # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
+    # request = google.auth.transport.requests.Request()
+    # audience = 'https://europe-west1-corrector-sm.cloudfunctions.net/corregir_func'
+    # TOKEN = google.oauth2.id_token.fetch_id_token(request, audience)
+    # r = requests.post(
+    #     'https://europe-west1-corrector-sm.cloudfunctions.net/corregir_func', 
+    #     headers={'Authorization': f"Bearer {TOKEN}", "Content-Type": "application/json"},
+    #     data=json.dumps({"message":text_in})  # possible request parameters
+    # )
+    # print(r.content)
+    # local=''
+    # word_D = []
+    # print(r.status_code, r.reason)
+    # return r.content
+    return ""
 
 def pyspellchecker(local):
     return sp.spell(local)
