@@ -3,4 +3,3 @@ flask_session
 pyspellchecker==0.6.3
 requests
 google-auth
-google.oauth2
