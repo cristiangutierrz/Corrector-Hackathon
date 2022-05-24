@@ -44,3 +44,11 @@ handlers:
 ```
 
 ![alt text](https://github.com/cristiangutierrz/Corrector-Hackathon/blob/main/public/imgs/diagram.drawio.png?raw=true)
+
+Tenim dos mètodes per corregir text:
+
+#### Package Local: pyspellchecker
+És un package de python que permet fer correccions de text locals. S'executa en el servidor i només en el servidor.
+
+#### External API: Typewise API
+Mitjançant una cloud function podrem cridar a aquesta API externa i retornar els resultats.
