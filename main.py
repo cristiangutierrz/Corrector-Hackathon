@@ -1,11 +1,6 @@
 from flask import Flask, request, redirect, url_for, session,render_template
 from flask_session import Session
 from src import spellcheck_local as sp
-import requests
-import json
-import google.oauth2.id_token
-import google.auth.transport.requests
-import os
 
 app = Flask(__name__)
 app.secret_key = "Some"
