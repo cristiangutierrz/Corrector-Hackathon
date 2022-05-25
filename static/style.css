@@ -73,26 +73,7 @@ input[type=submit] {
 
 @media only screen and (max-width: 1000px) {
 
-  #main h1 {
-    font-size: 34px;
-  }
-
-  #method {
-    font-size: 20px;
-  }
-
   #main {
     margin:10px 5vw;
-  }
-
-  input[type=submit] {
-    font-size: 28px;
-    padding: 14px 30px;
-    margin: 20px 0px;
-  }
-
-  textarea {
-    font-size: 25px;
-    height: 30vh;
   }
 }
