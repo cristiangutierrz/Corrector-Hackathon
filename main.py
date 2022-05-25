@@ -34,19 +34,20 @@ def root():
                 if method and len(method)>0:
                     if method == "Typewrite":
                         word_D = test_api(local)
+                        word_D = convert_to_sentence(word_D)
                     elif method == "PySpellchecker":
                         word_D = pyspellchecker(local)
             print("Response: ", word_D)
         else:
             local = None
     print(method)
-    return render_template('index.html', input='' if local is None else local, output='' if local is None else local + "\n\n" + str(word_D), method=method)
+    return render_template('index.html', input='' if local is None else local, output='' if local is None else str(word_D), method=method)
 
 def test_api(text_in):
     print("text_in: ", text_in)
     # TO-DO: Try-catch
     # Cuando se trabaja en local debera leer el fichero credentials .json
-    # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
     request = google.auth.transport.requests.Request()
     audience = 'https://europe-west3-corrector-sm.cloudfunctions.net/corregir'
     TOKEN = google.oauth2.id_token.fetch_id_token(request, audience)
@@ -55,11 +56,36 @@ def test_api(text_in):
         headers={'Authorization': f"Bearer {TOKEN}", "Content-Type": "application/json"},
         data=json.dumps({"message":text_in})  # possible request parameters
     )
-    print(r.content)
-    local=''
-    word_D = []
-    print(r.status_code, r.reason)
-    return r.content
+
+    # HTTP 200 - OK
+    if r.status_code == 200:
+        json_response = json.loads(r.content.decode("utf-8"))
+        return generarFrase(json_response)
+    return ""
+
+def generarFrase(json_response):
+    list_sentence = []
+    for word in json_response['tokens']:
+        list_sentence += [word['original_word']]
+        if len(word['suggestions']) > 0:
+            if word['original_word'] != word['suggestions'][0]['correction']:
+                list_suggest = []
+                if word['suggestions'][0]['score'] < 0.75:
+                    for suggestion in word['suggestions'][:3]:
+                        list_suggest += [suggestion['correction']]
+                else:
+                    list_suggest = [word['suggestions'][0]['correction']]
+                list_sentence += [list_suggest]
+    return list_sentence
+
+def convert_to_sentence(list_sentence):
+    text_out = ""
+    for w in list_sentence:
+        if isinstance(w, list):
+            text_out += "(" + ' '.join(w) + ") "
+        else:
+                text_out += w + " "
+    return text_out[:-1]
 
 def pyspellchecker(local):
     return sp.spell(local)
