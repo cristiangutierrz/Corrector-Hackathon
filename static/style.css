@@ -78,7 +78,7 @@ input[type=submit] {
   }
 
   #method {
-    font-size: 25px;
+    font-size: 20px;
   }
 
   #main {
@@ -86,13 +86,13 @@ input[type=submit] {
   }
 
   input[type=submit] {
-    font-size: 38px;
-    padding: 18px 48px;
-    margin: 40px 0px;
+    font-size: 28px;
+    padding: 14px 30px;
+    margin: 20px 0px;
   }
 
   textarea {
-    font-size: 28px;
+    font-size: 25px;
     height: 30vh;
   }
 }
