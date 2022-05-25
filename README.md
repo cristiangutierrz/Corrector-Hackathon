@@ -4,8 +4,6 @@ https://corrector-sm.ew.r.appspot.com
 
 ![alt text](https://i.gyazo.com/2c2faec952fa46422f02a6f276eb7e56.gif)
 
-https://i.gyazo.com/2c2faec952fa46422f02a6f276eb7e56.gif
-
 Aquest és un projecte del Hackathon de l'assignatura de Sistemes Multimedia de la UAB.
 El projecte és una web hostejada al Google Cloud que ha de ser capaç de corregir un input de text i indicar les faltes.
 
