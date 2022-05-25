@@ -14,7 +14,7 @@ console.log(out.innerHTML)
 
 function showwords(params, ctx, idx) {
   console.log(params) 
-  console.log(ctx.style)
+  console.log(ctx.style )
   console.log(idx)
 
   // ctx.innerHTML = params[0]
