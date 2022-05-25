@@ -106,6 +106,21 @@ li {
   display:inline;
 }
 
-a {
+a, dialog {
   cursor: pointer;
+}
+
+dialog {
+  width:30vw;
+  caret-color: rgba(0,0,0,0);
+}
+
+dialog > * {
+  margin: 10px 20px;
+  color:rgb(57, 57, 57);
+}
+
+dialog > p > a:hover {
+  color:rgb(0, 0, 0);
+  font-weight: 600;
 }
