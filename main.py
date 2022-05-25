@@ -40,13 +40,13 @@ def root():
         else:
             local = None
     print(method)
-    return render_template('index.html', input='' if local is None else local, output='' if local is None else str(word_D), method=method)
+    return render_template('index.html', input='' if local is None else local, output='' if local is None else word_D, method=method)
 
 def test_api(text_in):
     print("text_in: ", text_in)
     # TO-DO: Try-catch
     # Cuando se trabaja en local debera leer el fichero credentials .json
-    # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
+    # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
     request = google.auth.transport.requests.Request()
     audience = 'https://europe-west3-corrector-sm.cloudfunctions.net/corregir'
     TOKEN = google.oauth2.id_token.fetch_id_token(request, audience)
@@ -66,7 +66,7 @@ def test_api(text_in):
 
         # Esta funcion SE HA DE COMENTAR, la he hecho para que muestre
         # "Hola ke (que qué) tal"
-        lista_palabras = convert_to_sentence(lista_palabras)
+        # lista_palabras = convert_to_sentence(lista_palabras)
         
         return lista_palabras
 

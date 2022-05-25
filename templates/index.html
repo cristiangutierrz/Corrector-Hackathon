@@ -24,7 +24,21 @@
             {% endif %}
             <textarea id="input-text" placeholder="Escriu algo..." name="input">{{ input }}</textarea>
             <input type="submit" name="submit_button" value="Corregir" />
-            <textarea id="output-text" readonly placeholder="El text corregit apareixerà aqui." name="output">{{output}}</textarea>
+            
+<div class="editable" contenteditable="true" oncut="return false" onpaste="return false" onkeydown="if(event.metaKey) return true; return false;" placeholder="El text corregit apareixerà aqui." name="output">
+{%- for w in output: -%}
+    {%- if w is iterable and (w is not string and w is not mapping) -%}
+        <li>({{', '.join(w)}}) </li>
+    {%- else -%}
+        {%- if loop.nextitem is not defined or loop.nextitem is string -%}
+            <li>{{w}} </li>
+        {%- else -%}
+            <li><a onclick="showwords({{loop.nextitem}}, this)" style="text-decoration: none; color:rgb(227, 63, 63); font-weight: 600;">{{w}}</a> </li>
+        {%- endif -%}
+    {%- endif -%}
+{%- endfor -%}
+</div>
+
         </form>
     </div>
 
