@@ -34,7 +34,6 @@ def root():
                 if method and len(method)>0:
                     if method == "Typewrite":
                         word_D = test_api(local)
-                        word_D = convert_to_sentence(word_D)
                     elif method == "PySpellchecker":
                         word_D = pyspellchecker(local)
             print("Response: ", word_D)
@@ -60,7 +59,17 @@ def test_api(text_in):
     # HTTP 200 - OK
     if r.status_code == 200:
         json_response = json.loads(r.content.decode("utf-8"))
-        return generarFrase(json_response)
+
+        # Este metodo te convierte todo en una lista
+        # ['Hola', 'ke', ['que', 'qué'], 'tal']
+        lista_palabras = generarFrase(json_response)
+
+        # Esta funcion SE HA DE COMENTAR, la he hecho para que muestre
+        # "Hola ke (que qué) tal"
+        lista_palabras = convert_to_sentence(lista_palabras)
+        
+        return lista_palabras
+
     return ""
 
 def generarFrase(json_response):
