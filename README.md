@@ -31,6 +31,10 @@ En cas de no tenir les credencials, es mostrarà a consola aquest missatge:
 ```
 Falten les credencials del google cloud .json! No es podrà cridar a la API de Typewise.
 ```
+En cas de tenir les credencials, s'haurà de descomentar la línia 73 de main.py:
+```
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
+```
 
 ## Google Cloud
 Mitjançant l'api de Cloud Build de Google Cloud som capaços de enllaçar aquest repositori a l'instància del cloud. Això permitirà fer CI/CD donat que cada vegada que es faci un push a la main branch s'activarà un Build Trigger al cloud que llançarà una nova instància del nostre Dockerfile.
