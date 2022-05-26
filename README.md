@@ -25,7 +25,7 @@ python3 main.py
 Si s'han fet bé els pasos a l'adreça http://localhost:8080 es podrà veure la UI de la web.
 
 Per a poder correr la web en local i que sigui funcional es requereix de les credencials del projecte en .json
-Aquestes credencials no són aquesta repo.
+Aquestes credencials no són a aquesta repo.
 
 ## Google Cloud
 Mitjançant l'api de Cloud Build de Google Cloud som capaços de enllaçar aquest repositori a l'instància del cloud. Això permitirà fer CI/CD donat que cada vegada que es faci un push a la main branch s'activarà un Build Trigger al cloud que llançarà una nova instància del nostre Dockerfile.
