@@ -60,8 +60,39 @@ handlers:
 
 Tenim dos mètodes per corregir text:
 
-#### Package Local: pyspellchecker
+### Package Local: pyspellchecker
 És un package de python que permet fer correccions de text locals. S'executa en el servidor i només en el servidor.
 
-#### External API: Typewise API
+### External API: Typewise API
 Mitjançant una cloud function podrem cridar a aquesta API externa i retornar els resultats.
+
+A la Cloud Funcion 'corregir' tenim el següent codi main.py:
+```python
+def correct_sentence(request):
+    import requests
+    request_json = request.get_json()
+    msg = ""
+    if request.args and 'message' in request.args:
+        msg = request.args.get('message')
+    elif request_json and 'message' in request_json:
+        msg = request_json['message']
+    
+    url = "https://typewise-ai.p.rapidapi.com/correction/whole_sentence"
+
+    payload = {
+        "text": msg,
+        "keyboard": "QWERTY",
+        "languages": [
+            "en",
+            "de",
+            "es"
+        ],
+    }
+    headers = {
+        "content-type": "application/json",
+        "X-RapidAPI-Host": "typewise-ai.p.rapidapi.com",
+        "X-RapidAPI-Key": "***************"
+    }
+
+    response = requests.request("POST", url, json=payload, headers=headers)
+    return response.text
