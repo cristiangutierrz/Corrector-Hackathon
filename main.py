@@ -46,7 +46,7 @@ def test_api(text_in):
     print("text_in: ", text_in)
     # TO-DO: Try-catch
     # Cuando se trabaja en local debera leer el fichero credentials .json
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
+    # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
     request = google.auth.transport.requests.Request()
     audience = 'https://europe-west3-corrector-sm.cloudfunctions.net/corregir'
     TOKEN = google.oauth2.id_token.fetch_id_token(request, audience)
