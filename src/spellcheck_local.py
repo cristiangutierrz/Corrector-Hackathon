@@ -1,22 +1,22 @@
 from spellchecker import SpellChecker
 
 def spell(input_string):
-    spell = SpellChecker(language='es')
+    spell = SpellChecker(language=['es', 'en', 'de'], case_sensitive=True)
 
     misspelled = spell.unknown(input_string.split())
 
-    l = []
 
     output = []
+    l = []
 
     for word in input_string.split():
-        if word in misspelled:
-            output.append("<del>" + word + "</del>")
-            output.append("(")
-            output.append(", ".join(list(spell.candidates(word))))
-            output.append(")")
-        else:
-            output.append(word)
+        output.append(word)
+        if word.lower() in misspelled:
+            if word not in misspelled:
+                l = [spell.correction(word).capitalize()]
+                output.append(l)
+            else:
+                output.append([spell.correction(word)])
     
     return output
 
