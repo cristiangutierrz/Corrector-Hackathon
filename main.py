@@ -70,31 +70,32 @@ def test_api(text_in):
     try:
         # Per a treballar en local i poder cridar a les cloud func necesitem pasar les nostres credentials
         # Aquesta credential es guarda en una variable d'entorn local per així evitar que es vegi la key
-        os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
+        # os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = './corrector-sm-9ef8799680bd.json'
+        request = google.auth.transport.requests.Request()
+        audience = 'https://europe-west3-corrector-sm.cloudfunctions.net/corregir'
+        TOKEN = google.oauth2.id_token.fetch_id_token(request, audience)
+        r = requests.post(
+            'https://europe-west3-corrector-sm.cloudfunctions.net/corregir', 
+            headers={'Authorization': f"Bearer {TOKEN}", "Content-Type": "application/json"},
+            data=json.dumps({"message":text_in}),  # Pasem la cadena de input
+            verify=False # Evitem SSLErrors
+        )
+
+        # En cas que vagi tot bé: HTTP 200 - OK
+        if r.status_code == 200:
+            # Carreguem la resposta
+            json_response = json.loads(r.content.decode("utf-8"))
+
+            # Convertim tot en una llista de paraules amb les sugerencies en llistes anidades
+            # ['Hola', 'ke', ['que', 'qué'], 'tal']
+            lista_palabras = generarFrase(json_response)
+
+            return lista_palabras
     except:
         print("\n\nERROR: Falten les credencials del google cloud .json! No es podrà cridar a la API de Typewise.\n")
         return ""
-    
-    request = google.auth.transport.requests.Request()
-    audience = 'https://europe-west3-corrector-sm.cloudfunctions.net/corregir'
-    TOKEN = google.oauth2.id_token.fetch_id_token(request, audience)
-    r = requests.post(
-        'https://europe-west3-corrector-sm.cloudfunctions.net/corregir', 
-        headers={'Authorization': f"Bearer {TOKEN}", "Content-Type": "application/json"},
-        data=json.dumps({"message":text_in}),  # Pasem la cadena de input
-        verify=False # Evitem SSLErrors
-    )
 
-    # En cas que vagi tot bé: HTTP 200 - OK
-    if r.status_code == 200:
-        # Carreguem la resposta
-        json_response = json.loads(r.content.decode("utf-8"))
-
-        # Convertim tot en una llista de paraules amb les sugerencies en llistes anidades
-        # ['Hola', 'ke', ['que', 'qué'], 'tal']
-        lista_palabras = generarFrase(json_response)
-
-    return lista_palabras
+    return ""
 
 # Amb aquesta funció fem parse del json i ens quedem amb aquelles paraules que tinguin un bon score
 # En cas de tenir un mal score retornem les 3 primeres sugerencies.
