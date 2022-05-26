@@ -27,6 +27,11 @@ Si s'han fet bé els pasos a l'adreça http://localhost:8080 es podrà veure la 
 Per a poder correr la web en local i que sigui funcional es requereix de les credencials del projecte en .json
 Aquestes credencials no són a aquesta repo.
 
+En cas de no tenir les credencials, es mostrarà a consola aquest missatge:
+```
+Falten les credencials del google cloud .json! No es podrà cridar a la API de Typewise.
+```
+
 ## Google Cloud
 Mitjançant l'api de Cloud Build de Google Cloud som capaços de enllaçar aquest repositori a l'instància del cloud. Això permitirà fer CI/CD donat que cada vegada que es faci un push a la main branch s'activarà un Build Trigger al cloud que llançarà una nova instància del nostre Dockerfile.
 
@@ -55,8 +60,39 @@ handlers:
 
 Tenim dos mètodes per corregir text:
 
-#### Package Local: pyspellchecker
+### Package Local: pyspellchecker
 És un package de python que permet fer correccions de text locals. S'executa en el servidor i només en el servidor.
 
-#### External API: Typewise API
+### External API: Typewise API
 Mitjançant una cloud function podrem cridar a aquesta API externa i retornar els resultats.
+
+A la Cloud Funcion 'corregir' tenim el següent codi main.py:
+```python
+def correct_sentence(request):
+    import requests
+    request_json = request.get_json()
+    msg = ""
+    if request.args and 'message' in request.args:
+        msg = request.args.get('message')
+    elif request_json and 'message' in request_json:
+        msg = request_json['message']
+    
+    url = "https://typewise-ai.p.rapidapi.com/correction/whole_sentence"
+
+    payload = {
+        "text": msg,
+        "keyboard": "QWERTY",
+        "languages": [
+            "en",
+            "de",
+            "es"
+        ],
+    }
+    headers = {
+        "content-type": "application/json",
+        "X-RapidAPI-Host": "typewise-ai.p.rapidapi.com",
+        "X-RapidAPI-Key": "***************"
+    }
+
+    response = requests.request("POST", url, json=payload, headers=headers)
+    return response.text
