@@ -92,7 +92,7 @@ def test_api(text_in):
 
             return lista_palabras
     except:
-        print("Falten les credencials del google cloud .json! No es podrà cridar a la API de Typewise.")
+        print("\n\nERROR: Falten les credencials del google cloud .json! No es podrà cridar a la API de Typewise.\n")
 
     return ""
 
